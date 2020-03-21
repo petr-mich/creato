@@ -1,0 +1,87 @@
+.carrousel {
+	position: relative;
+}
+
+.carrousel__btns {
+	position: absolute;
+	z-index: 1000;
+	text-align: right;
+}
+
+.carrousel__btn-prev,
+.carrousel__btn-next {
+	position: relative;
+	padding: 0;
+	width: 9px;
+	height: 15px;
+	box-sizing: border-box;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+
+	&::before {
+		@extend %pseudo-absolute-center;
+		width: 10px;
+		height: 10px;
+		border: 1px solid $white;
+		border-left: none;
+		border-bottom: none;
+		transition: border-color 300ms;
+	}
+
+	&:hover,
+	&:focus {
+
+		&::before {
+			border-color: transparentize($white, 0.3);
+		}
+	}
+
+	&:active {
+
+		&::before {
+			border-color: transparentize($white, 0.6);
+		}
+	}
+
+	&:disabled {
+
+		&::before {
+			border-color: rgb(194, 53, 38);
+		}
+	}
+}
+
+.carrousel__btn-prev {
+	margin-right: 17px;
+}
+
+.carrousel__btn-prev::before {
+	transform: translate(-25%, -50%) rotate(-135deg);
+}
+
+.carrousel__btn-next::before {
+	transform: translate(-75%, -50%) rotate(45deg);
+}
+
+.carrousel__toggles {
+	display: flex;
+	justify-content: center;
+}
+
+.carrousel__toggle-btn {
+	display: block;
+	margin: 0 5px;
+	padding: 0;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: $white;
+	border: 0;
+	cursor: pointer;
+	transition: background-color 300ms;
+
+	&.active {
+		background-color: rgb(194, 53, 38);
+	}
+}

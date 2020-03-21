@@ -1,0 +1,189 @@
+@mixin clearfix() {
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+}
+
+@mixin adaptive-video() {
+	position: relative;
+	padding-bottom: 56.25%; /* задаёт высоту контейнера для 16:9 (если 4:3 — поставить 75%) */
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+
+	iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+@mixin min-max($min-width, $max-width, $padding) {
+	min-width: $min-width;
+	max-width: $max-width;
+	padding: 0 $padding;
+	box-sizing: border-box;
+	margin: 0 auto;
+}
+
+@mixin pseudo-line($width: 90px, $left-dist: 45px, $line-height: 1) {
+	content: '';
+	position: absolute;
+	left: - $width - $left-dist;
+	top: get-half-line-height($line-height);
+	display: block;
+	width: $width;
+	height: 1px;
+	background-color: $white;
+}
+
+@mixin arrowed-link($arrowColor: $mainColor, $hoverColor: $testimonialBgColor) {
+	position: relative;
+	display: inline-block;
+	padding: 5px 30px 5px 0;
+	font-size: 18px;
+	line-height: 1.15;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	color: $mainColor;
+	transition-property: color, opacity;
+	transition-duration: 300ms;
+
+	&::before {
+		content: '';
+		position: absolute;
+		right: 2px;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 13px;
+		height: 2px;
+		background-color: $arrowColor;
+		transition: background-color 300ms;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		right: 2px;
+		top: 50%;
+		transform: translateY(-50%) rotate(45deg);
+		width: 6px;
+		height: 6px;
+		border: 2px solid $arrowColor;
+		border-left: none;
+		border-bottom: none;
+		transition: border-color 300ms;
+	}
+
+	&:hover,
+	&:focus {
+		color: $hoverColor;
+
+		&::before {
+			background-color: $hoverColor;
+		}
+
+		&::after {
+			border-color: $hoverColor;
+		}
+	}
+
+	&:active {
+		color: transparentize($hoverColor, 0.3);
+
+		&::before {
+			background-color: transparentize($hoverColor, 0.3);
+		}
+
+		&::after {
+			border-color: transparentize($hoverColor, 0.3);
+		}
+	}
+
+	@content;
+}
+
+@mixin dynamicText($minSizePercent, $maxSize, $minSize, $minWidthPx, $maxWidth, $minWidth) {
+	font-size: calc(#{$minSizePercent} + (#{$maxSize} - #{$minSize}) * (100vw - #{$minWidthPx}) / (#{$maxWidth} - #{$minWidth}));
+}
+
+@mixin dynamicTextIncrease($currentSize, $minWidthPx: $templateWidth + px, $maxWidth: $maxDynamicWidth, $minWidth: $templateWidth) {
+	$minSizePercent: $currentSize / $fontSizeDefault * 100%;
+	$maxSize: $currentSize * 2;
+	$minSize: $currentSize;
+	$deltaSize: ($maxSize - $minSize) / 1px;
+
+	font-size: calc(#{$minSizePercent} + #{$deltaSize} * (100vw - #{$minWidthPx}) / (#{$maxWidth} - #{$minWidth}));
+}
+
+@mixin button($bgc: $pageHeaderBorderColor, $brc: $pageHeaderBorderColor, $btn: false) {
+	display: block;
+	padding: 16px 0;
+	width: 170px;
+	box-sizing: border-box;
+	background-color: $bgc;
+	font-family: 'Raleway', 'Arial', sans-serif;
+	font-size: 14px;
+	line-height: 18px;
+	font-weight: 800;
+	text-align: center;
+	color: $white;
+	text-transform: uppercase;
+	border: 2px solid $brc;
+	border-radius: 5px;
+	transition-property: background-color, color, border-color;
+	transition-duration: 500ms;
+
+	@if $btn == true {
+		box-shadow: none;
+		appearance: none;
+		cursor: pointer;
+	}
+
+	&:hover,
+	&:focus {
+		background-color: darken($bgc, 10);
+		border-color: darken($bgc, 10);
+	}
+
+	&:active {
+		color: darken($white, 20);
+	}
+
+	@content;
+};
+
+@mixin devider($line-color: $deviderLineColor) {
+	position: relative;
+	margin: 0 auto 67px;
+	width: 7px;
+	height: 7px;
+	background-color: $mainNavColorHover;
+	border-radius: 50%;
+
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 80px;
+		height: 1px;
+		background-color: $line-color;
+	}
+
+	&::before {
+		left: -95px;
+	}
+
+	&::after {
+		right: -95px;
+	}
+
+	@content;
+}

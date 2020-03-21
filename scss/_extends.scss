@@ -1,0 +1,29 @@
+%absolute-center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+%pseudo-absolute-center {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: block;
+}
+
+%background-text {
+	position: absolute;
+	z-index: -1;
+	font-size: 128px;
+	line-height: 1;
+	font-weight: 900;
+	color: transparentize($white, 0.988);
+	text-transform: uppercase;
+
+	@media (max-width: 979px) {
+		font-size: 65px;
+	}
+}

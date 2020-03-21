@@ -1,0 +1,138 @@
+.about {
+	padding-top: 50px;
+}
+
+.about__wrapper {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 80px;
+
+	&::before {
+		@extend %background-text;
+		content: 'about';
+		left: 15px;
+		top: 65px;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		left: 15px;
+		top: 155px;
+		bottom: 0;
+		display: block;
+		width: calc(100% - 30px);
+		background: url('../../img/about-bg.jpg') center top no-repeat;
+		background-size: cover;
+		box-shadow: 0px 9px 51px 0px rgba(0, 0, 0, 0.26);
+	}
+}
+
+.about__info {
+	position: relative;
+	z-index: 1;
+	flex-basis: (617 / 1170) * 100%;
+	padding: 300px 62px 0 64px;
+	box-sizing: border-box;
+}
+
+.about__image-wrapper {
+	position: relative;
+	z-index: 1;
+	align-self: flex-start;
+	flex-basis: (470 / 1170) * 100%;
+	margin-right: 84px;
+	box-sizing: border-box;
+	box-shadow: 0px 14px 29px 0px rgba(0, 0, 0, 0.16);
+
+	img {
+		display: block;
+	}
+}
+
+.about__text {
+	position: relative;
+	line-height: 1.875;
+	font-weight: 300;
+
+	&::before {
+		@include pseudo-line($width: 37px, $left-dist: 27px, $line-height: 1.875);
+	}
+}
+
+.about__button {
+	@include arrowed-link();
+	margin-top: 37px;
+}
+
+@media (min-resolution: 2dppx) {
+	.about__wrapper::after {
+		background-image: url('../../img/about-bg@2x.jpg');
+	}
+}
+
+@media (max-width: 1199px) {
+	.about__info {
+		padding-top: 225px;
+	}
+}
+
+@media (max-width: 979px) {
+	.about__wrapper{
+		padding-bottom: 40px;
+
+		&::before {
+			top: 54px;
+		}
+
+		&::after {
+			top: 100px;
+		}
+	}
+
+	.about__info {
+		padding: 150px 30px 0 20px;
+	}
+
+	.about__text::before {
+		display: none;
+	}
+
+	.about__image-wrapper {
+		margin-right: 40px;
+		flex-basis: ((470 + 44) / 1170) * 100%;
+	}
+}
+
+@media (max-width: 767px) {
+	.about__wrapper {
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		padding-top: 46px;
+
+		&::before {
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+		&::after {
+			top: 150px;
+		}
+	}
+
+	.about__info {
+		flex-basis: auto;
+		padding: 50px 15px 0;
+	}
+
+	.about__image-wrapper {
+		align-self: auto;
+		flex-basis: auto;
+		max-width: 320px;
+		order: -1;
+		margin-right: 0;
+	}
+}

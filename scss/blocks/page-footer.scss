@@ -1,0 +1,27 @@
+.page-footer {
+	padding: 50px 0;
+}
+
+.page-footer__wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.page-footer__copyright {
+	flex-basis: 470px;
+}
+
+@media (max-width: 767px) {
+	.page-footer__wrapper {
+		flex-direction: column;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+	}
+
+	.page-footer__copyright {
+		flex-basis: auto;
+		order: 1;
+		margin-top: 10px;
+	}
+}
